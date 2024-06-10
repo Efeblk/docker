@@ -17,7 +17,7 @@ RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 # Copy initialization script
 COPY ./tools/init.sql /var/www/initdb.sql
 
-# Manually start MariaDB, run the initialization script, and then stop MariaDB
+# Manually start MariaDB, run the initialization script
 RUN openrc && touch /run/openrc/softlevel && \
     rc-service mariadb start && \
     mysql < /var/www/initdb.sql && \
