@@ -1,8 +1,26 @@
 # Start with the Alpine base image
-FROM alpine:3.15
+FROM alpine:3.19
 
-# Install necessary packages for WordPress
-RUN apk update && apk add php7 php7-fpm php7-mysqli php7-pecl-redis php7-phar php7-mbstring php7-iconv php7-gd supervisor curl
+RUN apk update && apk add \
+    php81 \
+    php81-fpm \
+    php81-mysqli \
+    php81-pecl-redis \
+    php81-phar \
+    php81-mbstring \
+    php81-iconv \
+    php81-gd \
+    php81-json \
+    php81-session \
+    php81-xml \
+    php81-simplexml \
+    php81-curl \
+    php81-xmlwriter \
+    php81-xmlreader \
+    php81-zip \
+    supervisor \
+    curl && \
+    ln -s /usr/bin/php81 /usr/bin/php
 
 # Create necessary directories and set permissions
 RUN mkdir -p /var/www /var/log/php-fpm /var/run/php-fpm && \
@@ -12,12 +30,13 @@ RUN mkdir -p /var/www /var/log/php-fpm /var/run/php-fpm && \
 RUN adduser -D -g 'nginx' nginx
 
 # Configure PHP-FPM to listen on port 9000
-COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY ./conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 # Download and extract WordPress
 RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
     tar -xzf wordpress.tar.gz -C /var/www/ && \
     mv /var/www/wordpress /var/www/html && \
+    chown -R nginx:nginx /var/www/html && \
     rm wordpress.tar.gz
 
 # Install WP-CLI
