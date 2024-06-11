@@ -2,7 +2,7 @@
 FROM alpine:3.15
 
 # Install necessary packages for WordPress
-RUN apk update && apk add php7 php7-fpm php7-mysqli php7-pecl-redis php7-phar php7-mbstring php7-iconv supervisor curl
+RUN apk update && apk add php7 php7-fpm php7-mysqli php7-pecl-redis php7-phar php7-mbstring php7-iconv php7-gd supervisor curl
 
 # Create necessary directories and set permissions
 RUN mkdir -p /var/www /var/log/php-fpm /var/run/php-fpm && \
