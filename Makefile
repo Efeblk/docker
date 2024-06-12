@@ -1,6 +1,6 @@
 all:
-	@mkdir -p $(HOME)/data/wordpress
-	@mkdir -p $(HOME)/data/mariadb
+	@mkdir -p $(HOME)/ibalik/data/wordpress
+	@mkdir -p $(HOME)/ibalik/data/mariadb
 	@docker compose -p inception -f ./srcs/docker-compose.yml up
 
 down:
