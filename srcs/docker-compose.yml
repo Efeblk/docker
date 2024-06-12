@@ -36,10 +36,10 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
-    depends_on:
-      - mariadb
     env_file:
       - .env
+    depends_on:
+      - mariadb
     volumes:
       - wp:/var/www/html
     networks:
