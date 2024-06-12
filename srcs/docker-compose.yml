@@ -36,6 +36,8 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
+    depends_on:
+      - mariadb
     env_file:
       - .env
     volumes:
